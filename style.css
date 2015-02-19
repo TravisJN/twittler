@@ -1,5 +1,5 @@
 .container {
-	width: 60%;
+	width: 450px;
 	background-color: #FFCD57;
 	margin: 15px;
 	padding: 15px;
@@ -18,22 +18,12 @@ h1 {
 	float: left;
 }
 
-.home {
-	float: left;
-	padding-top: 37px;
-	padding-left: 7px;
-	
-}
-
 .main-content {
 	background-color: #A2A653;
 	padding: 10px;
 	border-radius: 5px;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
 }
-
-
 
 ul {
 	color: #FFCD57;
@@ -47,7 +37,6 @@ li {
 	border: 1px solid blue;
 	border-radius: 10px;
 	background-color: #4A3A47;
-	
 	display: none;
 }
 
@@ -62,6 +51,9 @@ a:visited {
 
 a.home {
 	color: #4A3A47;
+	float: left;
+	padding-top: 37px;
+	padding-left: 7px;
 }
 
 .timeStamp {
