@@ -7,16 +7,18 @@
   </head>
   <body>
     <div class="container">
-      <div class="header"><h2>Twittler</h2></div>
+      <div class="header"><h1>Twittler</h1></div>
       <div class="main-content">
         <ul class="tweets">
         </ul>
       </div>
-      <div class="footer">footer</div>
+      <div class="footer"></div>
     </div>
     <script>
       $(document).ready(function(){
     var liveUpdates = true;
+
+    
 
       var userTimeline = function(user) {
        console.log(user);
@@ -24,7 +26,7 @@
         user = user[0];
         user = '.' + user;
 
-        $('li:not(user)').slideUp();
+        $('li').slideUp();
         $(user).slideDown();
 
         
@@ -36,8 +38,9 @@
         });
       }
 
-        var $home = $('<a href="#" class="home">Home</a>');
+        var $home = $('<a href="#" class="home">Return to all twittles</a>');
             $home.appendTo('.header');
+            $home.hide();
         var $body = $('body');
         //var $newTweetButton = $("<button id='new-tweet'>Click to check for new tweets</button>");
         //$newTweetButton.appendTo($('.header'));
@@ -49,42 +52,48 @@
           while(index >= min){
             var tweet = streams.home[index];
             var $tweet = $('<li class=' + tweet.user + '></li>');
-            var $user = $("<a href='#' class='link'>@" + tweet.user + "</a>");
+            var $user = $("<a class='link'>@" + tweet.user + "</a>");
             
             $tweet.addClass(index.toString());
 
-            var now = new Date($.now());
+            var $now = $('<div class="timeStamp"></div>');
+            var date = new Date($.now());
+            $now.text(date);
 
-            $tweet.text(":" + tweet.message + " ");
+
+            $tweet.text(":  " + tweet.message);
 
             $tweet.prependTo($(".tweets"));
 
-            $("." + index).append(now);
+            $("." + index).append($now);
             $("." + index).prepend($user);
             $('li').slideDown();
             index -= 1;
           }
+
           min = streams.home.length;  //store this value for already displayed tweets
 
-          $('li').on('click', '.link', function(event) {
-            event.preventDefault();
-            console.log('click!');
-            liveUpdates = false;
-            userTimeline($(this).closest('li').attr("class"));
-          });
           
-
+        
+          
         }
+        
 
         newTweets();  //display tweets on page load
 
-        $('#new-tweet').on('click', newTweets);
+        //$('#new-tweet').on('click', newTweets);
 
+        $('.tweets').on('click','.link', function(event) {
+            event.preventDefault();
+            liveUpdates = false;
+            userTimeline($(this).closest('li').attr("class"));
+          });
 
         setInterval(function() {
           if (liveUpdates) {
             newTweets();
           }}, 3000);
+
 
 
         });
